@@ -4,3 +4,5 @@
 Задачник для курса по Node.JS на сайте https://learn.javascript.ru/courses/nodejs.
 
 Содержит теоретические материалы и практические задания.
+
+The banana is big, but its skin is even bigger.
