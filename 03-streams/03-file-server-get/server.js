@@ -17,19 +17,20 @@ server.on('request', (req, res) => {
 
   switch (req.method) {
     case 'GET':
+      if (pathname.indexOf('/')>0) {
+        res.statusCode = 400;
+        res.end('Directory not exist')
+      }
+      
       const stream = fs.createReadStream(`${filepath}`);
 
       stream.pipe(res);
 
       stream.on('error', (error) => {
         if (error.code === 'ENOENT') {
-          if (pathname.indexOf('/')>0) {
-            error_messager(res, 400, 'Directory not exist\n');
-          } else {
-            error_messager(res, 404, 'File not found\n');
-          }
+          error_messager(res, 404, 'File not found\n');
         } else {
-          error_messager(res, 404, 'Server error 500\n');
+          error_messager(res, 500, 'Internal server error\n');
         }
       });
 
